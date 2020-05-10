@@ -2,27 +2,8 @@ import React from 'react';
 import '../../styles/header.css';
 
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
-const GET_CATEGORIES = gql`
-    query GetCategories {
-        # categories {
-        #     paginatorInfo{
-        #         count
-        #         hasMorePages
-        #     }
-        #     data {
-        #         id
-        #         name
-        #         slug
-        #     }
-        # }
-        parents(where: { column: PARENT, operator: IS_NULL }) {
-            id
-            name
-        }
-    }
-`;
+import { GET_CATEGORIES } from '../../graphql/queries/categories';
+import { Category } from '../../graphql';
 
 const Navbar = (): JSX.Element => {
     const { 
@@ -78,15 +59,40 @@ const Navbar = (): JSX.Element => {
                                     <div className="main-menu d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li className="hot parent"><a href="#latest">Latest</a>
-                                                    <ul className="submenu">
-                                                        <li><a href="product_list.html"> Product list</a></li>
-                                                        <li><a href="single-product.html"> Product Details</a></li>
-                                                    </ul>
+                                                <li className="hot parent">
+                                                    <a href="#latest">New Arrivals</a>
+                                                    <div className="submenu-wrapper">
+                                                        <ul id="list">
+                                                            <li><a href="product_list.html"> Product list</a></li>
+                                                            <li><a href="single-product.html"> Product Details</a></li>
+                                                        </ul>
+                                                    </div>
                                                 </li>
                                                 {data.parents &&
-                                                    data.parents.map((parent: any) => (
-                                                    <li className="parent" key={parent.id}><a href="Catagori.html">{ parent.name }</a></li>
+                                                    data.parents.map((parent: Category) => (
+                                                    <li className="parent" key={parent.id}>
+                                                        <a href="Catagori.html">{ parent.name }</a>
+                                                        { (parent.children.length > 0) ?
+                                                            (
+                                                                <div className="submenu-wrapper">
+                                                                    <ul id="list">
+                                                                        <li>
+                                                                            <h2 id="shop-by-product" className="">
+                                                                                <span>CATALOG</span>
+                                                                            </h2>
+                                                                            <ul className="submenu-wrapper-inner">
+                                                                                { parent.children.map((cat: Category) => (
+                                                                                    <li key={cat.id}>
+                                                                                        <a href="product_list.html">{cat.name}</a>
+                                                                                    </li>
+                                                                                ))}
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            ) : ''
+                                                        }
+                                                    </li>
                                                 ))}
                                             </ul>
                                         </nav>
