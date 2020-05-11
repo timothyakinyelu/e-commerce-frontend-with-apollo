@@ -11,6 +11,15 @@ export const GET_CATEGORIES = gql`
                 parent_id
                 name
             }
+            products {
+                id
+                brand_id
+                name
+                brand {
+                    id
+                    name
+                }
+            }
         }
     }
 `;

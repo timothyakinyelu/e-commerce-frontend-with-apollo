@@ -4,6 +4,7 @@ import '../../styles/header.css';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_CATEGORIES } from '../../graphql/queries/categories';
 import { Category } from '../../graphql';
+import { useWindowResize } from '../../../useWindowResize';
 
 const Navbar = (): JSX.Element => {
     const { 
@@ -11,14 +12,73 @@ const Navbar = (): JSX.Element => {
         loading, 
         error
     } = useQuery(GET_CATEGORIES);
+    const { width } = useWindowResize();
+
+    const toggleBurger = (e: React.MouseEvent<SVGSVGElement, MouseEvent>): void => {
+        e.preventDefault();
+
+        const burger = document.querySelector('.bars') as HTMLElement;
+        if(burger) {
+            burger.classList.toggle('active');
+        }
+    }
 
     if (loading) return <p>...Loading</p>;
     if (error) return <p>ERROR</p>;
     if (!data) return <p>Not found</p>;
 
+    const menuList = () => {
+        if(data.parents === undefined) return;
+
+        if(data.parents) {
+            return data.parents.map((parent: Category) => (
+                <li className="parent" key={parent.id}>
+                    <a href="Catagori.html">{ parent.name }</a>
+                    { (parent.children !== []) ?
+                        (
+                            <div className="submenu-wrapper">
+                                <ul id="list">
+                                    <li>
+                                        <h2 id="catalog" className="">
+                                            <span>CATALOG</span>
+                                        </h2>
+                                        <ul className="submenu-wrapper-inner">
+                                            { parent.children.map((cat: Category) => (
+                                                <li key={cat.id}>
+                                                    <a href="product_list.html">{cat.name}</a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h2 id="catalog" className="">
+                                            <span>BRANDS</span>
+                                        </h2>
+                                        <ul className="submenu-wrapper-inner">
+                                            {  
+                                                parent.products.map((e) => e['brand_id'])
+                                                .map((e, i, final) => final.indexOf(e) === i && i)
+                                                .filter((e: any) => parent.products[e]).map((e: any) => parent.products[e])
+                                                .map(x => (
+                                                    <li key={x.brand.id}>
+                                                        <a href="product_list.html">{x.brand.name}</a>
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        ) : ''
+                    }
+                </li>
+            ))
+        }
+    }
+
     return (
         <header>
-            <div className="header-area">
+            <div className="headerContainer">
                 <div className="main-header ">
                     <div className="header-top top-bg d-none d-lg-block">
                         <div className="container-fluid">
@@ -53,8 +113,18 @@ const Navbar = (): JSX.Element => {
                         </div>
                     </div>
                     <div className="header-bottom  header-sticky sticky-bar sticky">
+                    { width < 992 && (
+                        <div className="">
+                            <div className="logo">
+                                <a href="index.html">
+                                    <h3>e-market</h3>
+                                    {/* <img src="assets/img/logo/logo.png" alt="" /> */}
+                                </a>
+                            </div>
+                        </div>
+                    )}
                         <div className="container">
-                            <div className="menu-list row align-items-center">
+                            <div className="navigation-menu row align-items-center">
                                 <div className="col-xl-8 col-lg-8 col-md-7 col-sm-5">
                                     <div className="main-menu d-none d-lg-block">
                                         <nav>
@@ -68,32 +138,7 @@ const Navbar = (): JSX.Element => {
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                {data.parents &&
-                                                    data.parents.map((parent: Category) => (
-                                                    <li className="parent" key={parent.id}>
-                                                        <a href="Catagori.html">{ parent.name }</a>
-                                                        { (parent.children.length > 0) ?
-                                                            (
-                                                                <div className="submenu-wrapper">
-                                                                    <ul id="list">
-                                                                        <li>
-                                                                            <h2 id="shop-by-product" className="">
-                                                                                <span>CATALOG</span>
-                                                                            </h2>
-                                                                            <ul className="submenu-wrapper-inner">
-                                                                                { parent.children.map((cat: Category) => (
-                                                                                    <li key={cat.id}>
-                                                                                        <a href="product_list.html">{cat.name}</a>
-                                                                                    </li>
-                                                                                ))}
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            ) : ''
-                                                        }
-                                                    </li>
-                                                ))}
+                                                { menuList() }
                                             </ul>
                                         </nav>
                                     </div>
@@ -108,13 +153,13 @@ const Navbar = (): JSX.Element => {
                                                 </div>
                                             </div>
                                         </li>
-                                        <li className=" d-none d-xl-block">
-                                            <div className="favorit-items">
+                                        <li className="">
+                                            <div className="wishlist">
                                                 <i className="mdi mdi-heart-outline"></i>
                                             </div>
                                         </li>
                                         <li>
-                                            <div className="shopping-card">
+                                            <div className="bag">
                                                 <a href="cart.html">
                                                     <i className="mdi mdi-shopping-outline"></i>
                                                 </a>
@@ -182,6 +227,15 @@ const Navbar = (): JSX.Element => {
                                         </div>
                                     </div>
                                 </div> */}
+                                { width < 992 && (
+                                    <div className="trigger">
+                                        <svg className="bars" viewBox="0 0 100 100" onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>): void => toggleBurger(e)}>
+                                        <path className="line top" d="m 30,33 h 40 c 13.100415,0 14.380204,31.80258 6.899646,33.421777 -24.612039,5.327373 9.016154,-52.337577 -12.75751,-30.563913 l -28.284272,28.284272"></path>
+                                        <path className="line middle" d="m 70,50 c 0,0 -32.213436,0 -40,0 -7.786564,0 -6.428571,-4.640244 -6.428571,-8.571429 0,-5.895471 6.073743,-11.783399 12.286435,-5.570707 6.212692,6.212692 28.284272,28.284272 28.284272,28.284272"></path>
+                                        <path className="line bottom" d="m 69.575405,67.073826 h -40 c -13.100415,0 -14.380204,-31.80258 -6.899646,-33.421777 24.612039,-5.327373 -9.016154,52.337577 12.75751,30.563913 l 28.284272,-28.284272"></path>
+                                        </svg>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
