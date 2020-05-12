@@ -13,6 +13,15 @@ const Navbar = (): JSX.Element => {
         error
     } = useQuery(GET_CATEGORIES);
     const { width } = useWindowResize();
+    const headerB = document.getElementById('bottomHeader') as HTMLElement;
+
+    if(headerB) {
+        if(width < 992) {
+            headerB.classList.replace('container', 'container-fluid');
+        } else {
+            headerB.classList.replace('container-fluid', 'container');
+        }
+    } 
 
     const toggleBurger = (e: React.MouseEvent<SVGSVGElement, MouseEvent>): void => {
         e.preventDefault();
@@ -114,7 +123,7 @@ const Navbar = (): JSX.Element => {
                     </div>
                     <div className="header-bottom  header-sticky sticky-bar sticky">
                     { width < 992 && (
-                        <div className="">
+                        <div className="logo-brand">
                             <div className="logo">
                                 <a href="index.html">
                                     <h3>e-market</h3>
@@ -123,7 +132,7 @@ const Navbar = (): JSX.Element => {
                             </div>
                         </div>
                     )}
-                        <div className="container">
+                        <div id="bottomHeader" className="container">
                             <div className="navigation-menu row align-items-center">
                                 <div className="col-xl-8 col-lg-8 col-md-7 col-sm-5">
                                     <div className="main-menu d-none d-lg-block">
@@ -145,7 +154,7 @@ const Navbar = (): JSX.Element => {
                                 </div>
                                 <div className="col-xl-4 col-lg-3 col-md-3 col-sm-3 fix-card">
                                     <ul className="header-right f-right d-none d-lg-block d-flex justify-content-between">
-                                        <li className="d-none d-xl-block">
+                                        <li className="search-box">
                                             <div className="form-box f-right ">
                                                 <input type="text" name="Search" placeholder="Search store" />
                                                 <div className="search-icon">
