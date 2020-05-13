@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_CATEGORIES } from '../../graphql/queries/categories';
 import { Category } from '../../graphql';
 import { useWindowResize } from '../../../useWindowResize';
+import { Form } from 'react-bootstrap';
 
 const Navbar = (): JSX.Element => {
     const { 
@@ -13,6 +14,7 @@ const Navbar = (): JSX.Element => {
         error
     } = useQuery(GET_CATEGORIES);
     const { width } = useWindowResize();
+
     const headerB = document.getElementById('bottomHeader') as HTMLElement;
 
     if(headerB) {
@@ -27,8 +29,39 @@ const Navbar = (): JSX.Element => {
         e.preventDefault();
 
         const burger = document.querySelector('.bars') as HTMLElement;
+        const sidebar = document.querySelector('.menu-sidebar') as HTMLElement;
+
         if(burger) {
             burger.classList.toggle('active');
+            sidebar.classList.toggle('open');
+        }
+    }
+
+    const toggleSearch = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+        e.preventDefault();
+
+        const search = document.querySelector('.mobile-search-icon') as HTMLElement;
+        const searchForm = document.querySelector('.mobile-form') as HTMLElement;
+        if(search) {
+            searchForm.classList.toggle('in');
+        }
+    }
+
+    const toggleCollapse = (e: React.MouseEvent<HTMLLIElement, MouseEvent>): void => {
+        e.preventDefault();
+
+        const stringID = e.currentTarget.dataset.id;
+        const item: Element | null = document.body.querySelector(`li[data-id=${stringID}]`);
+        item?.classList.toggle('active');
+        
+        if(item?.classList.contains('active')) {
+            item.getElementsByTagName('span')[0].style.display = 'none';
+            item.getElementsByTagName('span')[1].style.display = 'block';
+            item.getElementsByTagName('div')[0].classList.add('show');
+        } else {
+            item!.getElementsByTagName('span')[0].style.display = 'block';
+            item!.getElementsByTagName('span')[1].style.display = 'none';
+            item!.getElementsByTagName('div')[0].classList.remove('show');
         }
     }
 
@@ -141,7 +174,7 @@ const Navbar = (): JSX.Element => {
                                                 <li className="hot parent">
                                                     <a href="#latest">New Arrivals</a>
                                                     <div className="submenu-wrapper">
-                                                        <ul id="list">
+                                                        <ul id="list" className="list-arrival">
                                                             <li><a href="product_list.html"> Product list</a></li>
                                                             <li><a href="single-product.html"> Product Details</a></li>
                                                         </ul>
@@ -151,20 +184,91 @@ const Navbar = (): JSX.Element => {
                                             </ul>
                                         </nav>
                                     </div>
+                                    {
+                                        width < 992 && (
+                                            <div className="nav-menu">
+                                                <ul className="menu-sidebar">
+                                                    <li><a href="#home">Home</a></li>
+                                                    <li className="hot parent" onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>): void => toggleCollapse(e)} data-toggle="collapse" data-target="#demo" data-id="navItem0">
+                                                        <a href="#latest">
+                                                            New Arrivals
+                                                            <span className="arrow">+</span>
+                                                            <span className="arrow" style={{display: 'none'}}>-</span>
+                                                        </a>
+                                                        <div id="demo" className="collapse">
+                                                            <ul id="list" className="list-arrival">
+                                                                <li>
+                                                                    <a href="product_list.html"> Product list</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="single-product.html"> Product Details</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+                                                    {
+                                                        data.parents.map((parent: Category) => (
+                                                            <li className="parent" key={parent.id} onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>): void => toggleCollapse(e)} data-id={"navItem" + parent.id}>
+                                                                <a href="Catagori.html" tabIndex={Number("0")} data-toggle="collapse" data-target="#demo">
+                                                                    { parent.name }
+                                                                    {
+                                                                        parent.children.length > 0 && (
+                                                                            <>
+                                                                                <span className="arrow">+</span>
+                                                                                <span className="arrow" style={{display: 'none'}}>-</span>
+                                                                            </>
+                                                                        )
+                                                                    }
+                                                                </a>
+                                                                <div id="demo" className="collapse">
+                                                                    <ul id="list">
+                                                                        <li>
+                                                                            <ul className="submenu-wrapper-inner">
+                                                                                { parent.children.map((cat: Category) => (
+                                                                                    <li key={cat.id}>
+                                                                                        <a href="product_list.html">{cat.name}</a>
+                                                                                    </li>
+                                                                                ))}
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        ))
+                                                    }
+                                                </ul>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                                 <div className="col-xl-4 col-lg-3 col-md-3 col-sm-3 fix-card">
                                     <ul className="header-right f-right d-none d-lg-block d-flex justify-content-between">
                                         <li className="search-box">
                                             <div className="form-box f-right ">
-                                                <input type="text" name="Search" placeholder="Search store" />
+                                                <Form>
+                                                    <Form.Control type="text" name="Search" placeholder="Search store"  />
+                                                </Form>
                                                 <div className="search-icon">
-                                                    <i className="fa fa-search special-tag"></i>
+                                                    <i className="mdi mdi-magnify special-tag"></i>
                                                 </div>
                                             </div>
                                         </li>
+                                        {
+                                            width < 769 && (
+                                                <li className="search-box-mobile">
+                                                    <div className="form-box f-right ">
+                                                        <div className="mobile-search-icon" onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => toggleSearch(e)}>
+                                                            <i className="mdi mdi-magnify special-tag"></i>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            )
+                                        }
                                         <li className="">
                                             <div className="wishlist">
-                                                <i className="mdi mdi-heart-outline"></i>
+                                                <a href="cart.html">
+                                                    <i className="mdi mdi-heart-outline"></i>
+                                                </a>
                                             </div>
                                         </li>
                                         <li>
@@ -176,66 +280,17 @@ const Navbar = (): JSX.Element => {
                                         </li>
                                     </ul>
                                 </div>
-                                {/* <div className="col-12">
-                                    <div className="mobile_menu d-block d-lg-none">
-                                        <div className="slicknav_menu">
-                                            <a href="#menu" aria-haspopup="true" role="button" tabIndex= {Number("0")} className="slicknav_btn slicknav_collapsed" style={{ outline: "none" }}>
-                                                <span className="slicknav_menutxt">MENU</span>
-                                                <span className="slicknav_icon">
-                                                    <span className="slicknav_icon-bar"></span>
-                                                    <span className="slicknav_icon-bar"></span>
-                                                    <span className="slicknav_icon-bar"></span>
-                                                </span>
-                                            </a>
-                                            <ul className="slicknav_nav slicknav_hidden" aria-hidden="true" role="menu" style={{ display: "none" }}>
-                                                <li><a href="index.html" role="menuitem" tabIndex= {Number("-1")}>Home</a></li>
-                                                <li><a href="Catagori.html" role="menuitem" tabIndex= {Number("-1")}>Catagori</a></li>
-                                                <li className="hot slicknav_collapsed slicknav_parent">
-                                                    <a href="#l" role="menuitem" aria-haspopup="true" tabIndex= {Number("-1")} className="slicknav_item slicknav_row" style= {{ outline: "none" }}>
-                                                        <a href="#latest" tabIndex= {Number("-1")}>Latest</a>
-                                                        <span className="slicknav_arrow">+</span>
-                                                    </a>
-                                                    <ul className="submenu slicknav_hidden" role="menu" aria-hidden="true" style={{ display: "none" }}>
-                                                        <li>
-                                                            <a href="product_list.html" role="menuitem" tabIndex= {Number("-1")}> Product list</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product.html" role="menuitem" tabIndex= {Number("-1")}> Product Details</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li className="slicknav_collapsed slicknav_parent">
-                                                    <a href="#bl" role="menuitem" aria-haspopup="true" tabIndex= {Number("-1")} className="slicknav_item slicknav_row" style={{ outline: "none" }}>
-                                                        <a href="blog.html" tabIndex= {Number("-1")}>Blog</a>
-                                                        <span className="slicknav_arrow">+</span>
-                                                    </a>
-                                                    <ul className="submenu slicknav_hidden" role="menu" aria-hidden="true" style={{ display: "none" }}>
-                                                        <li><a href="blog.html" role="menuitem" tabIndex= {Number("-1")}>Blog</a></li>
-                                                        <li>
-                                                            <a href="single-blog.html" role="menuitem" tabIndex= {Number("-1")}>Blog Details</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li className="slicknav_collapsed slicknav_parent">
-                                                    <a href="#PA" role="menuitem" aria-haspopup="true" tabIndex= {Number("-1")} className="slicknav_item slicknav_row" style={{ outline: "none" }}>
-                                                        <a href="#page" tabIndex= {Number("-1")}>Pages</a>
-                                                        <span className="slicknav_arrow">+</span>
-                                                    </a>
-                                                    <ul className="submenu slicknav_hidden" role="menu" aria-hidden="true" style={{ display: "none" }}>
-                                                        <li><a href="login.html" role="menuitem" tabIndex= {Number("-1")}>Login</a></li>
-                                                        <li><a href="cart.html" role="menuitem" tabIndex= {Number("-1")}>Card</a></li>
-                                                        <li><a href="elements.html" role="menuitem" tabIndex= {Number("-1")}>Element</a></li>
-                                                        <li><a href="about.html" role="menuitem" tabIndex= {Number("-1")}>About</a></li>
-                                                        <li><a href="confirmation.html" role="menuitem" tabIndex= {Number("-1")}>Confirmation</a></li>
-                                                        <li><a href="cart.html" role="menuitem" tabIndex= {Number("-1")}>Shopping Cart</a></li>
-                                                        <li><a href="checkout.html" role="menuitem" tabIndex= {Number("-1")}>Product Checkout</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="contact.html" role="menuitem" tabIndex= {Number("-1")}>Contact</a></li>
-                                            </ul>
+                                {
+                                    width < 769 && (
+                                        <div className="mobile-form dropOut ">
+                                            <div className="triangle"></div>
+                                            <Form className="search-input-form">
+                                                <Form.Control type="text" name="Search" placeholder="Search store"  />
+                                                <i className="mdi mdi-magnify special-tag"></i>
+                                            </Form>
                                         </div>
-                                    </div>
-                                </div> */}
+                                    )
+                                }
                                 { width < 992 && (
                                     <div className="trigger">
                                         <svg className="bars" viewBox="0 0 100 100" onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>): void => toggleBurger(e)}>
