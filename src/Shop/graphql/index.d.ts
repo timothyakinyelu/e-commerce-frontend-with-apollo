@@ -9,7 +9,7 @@ export interface Category {
     products: Product[];
 }
 
-export interface Product {
+export interface ProductInfo {
     id: number;
     brand_id: number;
     sku: string;
