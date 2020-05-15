@@ -1,0 +1,10 @@
+main {
+    position: relative;
+    top: 0px;
+}
+
+@media screen and (max-width: 992px) {
+    main {
+        top: 80px;
+    }
+}
