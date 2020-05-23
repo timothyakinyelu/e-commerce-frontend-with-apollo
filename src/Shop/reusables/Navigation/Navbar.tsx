@@ -12,7 +12,7 @@ const Navbar = (): JSX.Element => {
         data, 
         loading, 
         error
-    } = useQuery(GET_CATEGORIES);
+    } = useQuery(GET_CATEGORIES, { fetchPolicy: "cache-first" });
     const { width } = useWindowResize();
 
     const headerB = document.getElementById('bottomHeader') as HTMLElement;
@@ -32,7 +32,7 @@ const Navbar = (): JSX.Element => {
         const sidebar = document.querySelector('.menu-sidebar') as HTMLElement;
 
         if(burger) {
-            burger.classList.toggle('active');
+            burger.classList.toggle('clicked');
             sidebar.classList.toggle('open');
         }
     }

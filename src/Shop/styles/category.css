@@ -1,0 +1,48 @@
+.card-body img {
+    width: 100%;
+}
+.main-section .card {
+    width: 500px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: none;
+}
+.main-section .card-footer {
+    margin: auto;
+    text-align: center;
+    border-top: none;
+    background-color: transparent;
+}
+.main-section .card-footer p {
+    padding: 0;
+    color: #545b62;
+}
+.main-section .card-footer h4 {
+    font-weight: 600;
+    font-family: 'Livvic', 'Open-Sans';
+}
+.main-section .section-caption  {
+    padding-top: 40px;
+}
+.main-section .section-caption h3  {
+    font-family: 'Livvic', 'Open-Sans';
+}
+a .card-body img {
+	transform: scale(1);
+	transition: .3s ease-in-out;
+}
+a .card-body:hover img {
+	transform: scale(1.3);
+}
+figure {
+	width: 500px;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	overflow: hidden;
+}
+figure:hover+span {
+	bottom: -36px;
+	opacity: 1;
+}

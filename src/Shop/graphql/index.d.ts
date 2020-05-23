@@ -9,6 +9,9 @@ export interface Category {
     products: Product[];
 }
 
+export interface ProductNode {
+    node: ProductInfo;
+}
 export interface ProductInfo {
     id: number;
     brand_id: number;

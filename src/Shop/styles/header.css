@@ -339,13 +339,13 @@ ul {
 .bars .line.bottom {
     stroke-dasharray: 10 172;
 }
-.bars.active .top {
+.bars.clicked .top {
     stroke-dashoffset: -132px;
 }
-.bars.active .middle {
+.bars.clicked .middle {
     stroke-dashoffset: -71px;
 }
-.bars.active .bottom {
+.bars.clicked .bottom {
     stroke-dashoffset: -132px;
 }
 

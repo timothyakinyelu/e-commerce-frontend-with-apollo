@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Gallery from '../components/Gallery';
 import '../styles/main.css';
-import ProductList from '../components/products/ProductList';
+import Categories from '../components/categories/Categories';
 
 const Main: React.FC = (): JSX.Element => {
     return (
-        <>
-            <main>
-                <Gallery />
-                <ProductList />
-            </main>
-        </>
-    )
+        <Fragment>
+            <Gallery />
+            <Categories />
+        </Fragment>
+    );
 }
 
 export default Main;

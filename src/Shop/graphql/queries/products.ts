@@ -1,19 +1,30 @@
 import gql from 'graphql-tag';
 
 export const GET_PRODUCTS = gql`
-    query GetProducts {
-        products {
-            paginatorInfo {
+    query GetProducts($after: String) {
+        products(after: $after) {
+            pageInfo {
+                hasNextPage
+                endCursor
                 count
-                hasMorePages
+                total
             }
-            data {
-                id
-                brand_id
-                name
-                price
-                image
+            edges {
+                node {
+                    id
+                    brand_id
+                    name
+                    price
+                    old_price
+                    image
+                }
             }
         }
+    }
+`;
+
+export const GET_VIEWED_PRODUCTS = gql`
+    query GetViewedProducts {
+        viewed @client
     }
 `;

@@ -6,19 +6,43 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import * as serviceWorker from './serviceWorker';
 import { ApolloClient } from 'apollo-client';
-import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { InMemoryCache, NormalizedCacheObject, defaultDataIdFromObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
+import { resolvers, typeDefs } from './resolvers';
+// import { persistCache } from 'apollo-cache-persist';
+// import { PersistentStorage, PersistedData } from 'apollo-cache-persist/types';
 
-const cache = new InMemoryCache();
-const link = new HttpLink({
-  uri: 'http://localhost:8000/graphql'
+const cache = new InMemoryCache({
+    dataIdFromObject: object => {
+        switch(object.__typename) {
+            case 'Category': return `Category:${object.id}`;
+            case 'Product': return `Product:${object.id}`;
+            default: return defaultDataIdFromObject(object);
+        }
+    }
 });
+const link = new HttpLink({
+    uri: 'http://localhost:8000/graphql'
+});
+
+// persistCache({
+//     cache,
+//     storage: window.localStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>,
+// });
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-  cache,
-  link
+    cache,
+    link,
+    typeDefs,
+    resolvers,
 });
+
+cache.writeData({
+    data: {
+        viewed: 0
+    }
+})
 
 ReactDOM.render(
     <React.StrictMode>

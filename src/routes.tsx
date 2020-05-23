@@ -2,30 +2,34 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './Shop/reusables/Navigation/Navbar';
 import Main from './Shop/pages/Main';
+import Category from './Shop/pages/Category';
 
 const Routes = (): JSX.Element => {
     return (
         <>
             <Switch>
-                <Route exact path="/" component={ShopComponent} />
-                <Route exact path="/admin" component={AdminComponent} />
+                <Route path="/" component={ShopComponent} />
+                <Route path="/admin" component={AdminComponent} />
             </Switch>
         </>
     );
 };
 
-const ShopComponent = (): JSX.Element => {
+const ShopComponent = () => {
     return (
         <>
             <Navbar />
-            <Switch>
-                <Route exact path="/" component={Main} />
-            </Switch>
+            <main>
+                <Switch>
+                    <Route exact path="/" component={Main} />
+                    <Route path="/shop/cat/:catName/:catID/" component={Category} />
+                </Switch>
+            </main>
         </>
     );
 }
 
-const AdminComponent = (): JSX.Element => {
+const AdminComponent = () => {
     return (
         <>
             <h2>Admin Section</h2>

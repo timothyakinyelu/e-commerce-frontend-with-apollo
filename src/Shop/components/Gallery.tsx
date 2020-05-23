@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import '../styles/gallery.css';
 
 import img1 from '../../images/image1.jpg';
@@ -6,6 +6,52 @@ import img2 from '../../images/image2.jpg';
 import img3 from '../../images/image3.png';
 
 const Gallery: React.FC = (): JSX.Element => {
+    const autoPlay = useCallback(() => {
+        const activeClass = document.querySelectorAll('#myCarousel li');
+        const item = document.getElementById('myCarousel') as HTMLElement;
+        const inner = item.getElementsByClassName('carousel-inner')[0] as HTMLElement;
+        const activeItem = inner.querySelectorAll('.item');
+
+        const test = inner.getElementsByClassName('active')[0];
+        const activeIndex = Array.from(activeItem).indexOf(test);
+        const nextIndex = activeIndex + 1;
+        
+        for (let i = 0; i < activeClass.length; i++) {
+            activeClass[i].classList.remove('active');
+        }
+
+        if(activeClass) {
+            for (let i = 0; i < activeItem.length; i++) {
+                activeItem[i].classList.remove('active');
+            }
+
+            if (nextIndex === activeItem.length) {
+                let checkedIndex = nextIndex - activeItem.length;
+                const next = document.getElementsByClassName('item')[checkedIndex] as HTMLElement;
+                const currentClass = document.getElementsByClassName('indicators')[checkedIndex] as HTMLElement;
+
+                next.classList.add('active');
+                currentClass.classList.add('active');
+            } else {
+                const next = document.getElementsByClassName('item')[nextIndex] as HTMLElement;
+                const currentClass = document.getElementsByClassName('indicators')[nextIndex] as HTMLElement;
+
+                next.classList.add('active');
+                currentClass.classList.add('active');
+            }
+        }
+        setTimeout(autoPlay, 5000);
+    },[]);
+
+    useEffect(() => {
+        const ac = new AbortController();
+        // autoPlay();
+
+        return function cleanup(): void {
+            ac.abort();
+        };
+    }, []);
+
     const changeSlide = (e: React.MouseEvent<HTMLLIElement, MouseEvent>): void => {
         e.preventDefault();
 
