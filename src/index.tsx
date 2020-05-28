@@ -9,7 +9,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject, defaultDataIdFromObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { resolvers, typeDefs } from './Shop/graphql/queries/resolvers';
+import { resolvers, typeDefs } from './Shop/graphql/resolvers/resolvers';
 // import { persistCache } from 'apollo-cache-persist';
 // import { PersistentStorage, PersistedData } from 'apollo-cache-persist/types';
 
@@ -40,7 +40,7 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 
 cache.writeData({
     data: {
-        wishListItems: []
+        wishListItems: localStorage.getItem('wishListItems') === null ? [] : [localStorage.getItem('wishListItems')],
     }
 })
 

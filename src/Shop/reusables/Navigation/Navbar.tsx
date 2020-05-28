@@ -5,9 +5,11 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_CATEGORIES } from '../../graphql/queries/categories';
 import { Category } from '../../graphql';
 import { useWindowResize } from '../../../useWindowResize';
-import { Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { GET_WISH_ITEMS } from '../../graphql/queries/products';
+import AuthBar from '../../components/AuthBar';
+import Menu from '../../components/Menu';
+import SearchBar from '../../components/SearchBar';
+import HamBurger from '../../components/HamBurger';
 
 const Navbar = (): JSX.Element => {
     const { 
@@ -22,7 +24,6 @@ const Navbar = (): JSX.Element => {
     } = useQuery(GET_WISH_ITEMS);
 
     const headerB = document.getElementById('bottomHeader') as HTMLElement;
-    console.log(list.wishListItems.length);
 
     if(headerB) {
         if(width < 992) {
@@ -59,9 +60,9 @@ const Navbar = (): JSX.Element => {
 
         const stringID = e.currentTarget.dataset.id;
         const item: Element | null = document.body.querySelector(`li[data-id=${stringID}]`);
-        item?.classList.toggle('active');
+        item?.classList.toggle('drop');
         
-        if(item?.classList.contains('active')) {
+        if(item?.classList.contains('drop')) {
             item.getElementsByTagName('span')[0].style.display = 'none';
             item.getElementsByTagName('span')[1].style.display = 'block';
             item.getElementsByTagName('div')[0].classList.add('show');
@@ -129,38 +130,7 @@ const Navbar = (): JSX.Element => {
         <header>
             <div className="headerContainer">
                 <div className="main-header ">
-                    <div className="header-top top-bg d-none d-lg-block">
-                        <div className="container-fluid">
-                            <div className="col-xl-12">
-                                <div className="row d-flex justify-content-between align-items-center">
-                                    <div className="">
-                                        <div className="logo">
-                                            <a href="index.html">
-                                                <h3>e-market</h3>
-                                                {/* <img src="assets/img/logo/logo.png" alt="" /> */}
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className="header-selectors-wrapper">
-                                        <div className="currency-selector">
-                                            <select id="customerCurrency" name="customerCurrency" aria-label="Currency selector">
-                                                <option value="https://demo.nopcommerce.com/changecurrency/1?returnUrl=%2F">US Dollar</option>
-                                                <option value="https://demo.nopcommerce.com/changecurrency/6?returnUrl=%2F">Euro</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <ul>
-                                        <li className="d-none d-lg-block"> 
-                                            <a href="#signin" className="btn header-btn">Register</a>
-                                        </li>
-                                        <li className="d-none d-lg-block"> 
-                                            <a href="#signin" className="btn header-btn">Sign in</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <AuthBar />
                     <div className="header-bottom  header-sticky sticky-bar sticky">
                     { width < 992 && (
                         <div className="logo-brand">
@@ -193,122 +163,13 @@ const Navbar = (): JSX.Element => {
                                     </div>
                                     {
                                         width < 992 && (
-                                            <div className="nav-menu">
-                                                <ul className="menu-sidebar">
-                                                    <li><a href="#home">Home</a></li>
-                                                    <li className="hot parent" onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>): void => toggleCollapse(e)} data-toggle="collapse" data-target="#demo" data-id="navItem0">
-                                                        <a href="#latest">
-                                                            New Arrivals
-                                                            <span className="arrow">+</span>
-                                                            <span className="arrow" style={{display: 'none'}}>-</span>
-                                                        </a>
-                                                        <div id="demo" className="collapse">
-                                                            <ul id="list" className="list-arrival">
-                                                                <li>
-                                                                    <a href="product_list.html"> Product list</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="single-product.html"> Product Details</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                    {
-                                                        data.parents.map((parent: Category) => (
-                                                            <li className="parent" key={parent.id} onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>): void => toggleCollapse(e)} data-id={"navItem" + parent.id}>
-                                                                <a href="Catagori.html" tabIndex={Number("0")} data-toggle="collapse" data-target="#demo">
-                                                                    { parent.name }
-                                                                    {
-                                                                        parent.children.length > 0 && (
-                                                                            <>
-                                                                                <span className="arrow">+</span>
-                                                                                <span className="arrow" style={{display: 'none'}}>-</span>
-                                                                            </>
-                                                                        )
-                                                                    }
-                                                                </a>
-                                                                <div id="demo" className="collapse">
-                                                                    <ul id="list">
-                                                                        <li>
-                                                                            <ul className="submenu-wrapper-inner">
-                                                                                { parent.children.map((cat: Category) => (
-                                                                                    <li key={cat.id}>
-                                                                                        <a href="product_list.html">{cat.name}</a>
-                                                                                    </li>
-                                                                                ))}
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                        ))
-                                                    }
-                                                </ul>
-                                            </div>
+                                            <Menu parents={data.parents} toggleCollapse={toggleCollapse} />
                                         )
                                     }
                                 </div>
-                                <div className="col-xl-4 col-lg-3 col-md-3 col-sm-3 fix-card">
-                                    <ul className="header-right f-right d-none d-lg-block d-flex justify-content-between">
-                                        <li className="search-box">
-                                            <div className="form-box f-right ">
-                                                <Form>
-                                                    <Form.Control type="text" name="Search" placeholder="Search store"  />
-                                                </Form>
-                                                <div className="search-icon">
-                                                    <i className="mdi mdi-magnify special-tag"></i>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        {
-                                            width < 769 && (
-                                                <li className="search-box-mobile">
-                                                    <div className="form-box f-right ">
-                                                        <div className="mobile-search-icon" onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => toggleSearch(e)}>
-                                                            <i className="mdi mdi-magnify special-tag"></i>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            )
-                                        }
-                                        <li className="">
-                                            <div className="wishlist">
-                                                <span className="badge badge-secondary">
-                                                    { list.wishListItems.length }
-                                                </span>
-                                                <Link to="/shop/wishlist">
-                                                    <i className="mdi mdi-heart-outline"></i>
-                                                </Link>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="bag">
-                                                <a href="cart.html">
-                                                    <i className="mdi mdi-shopping-outline"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                {
-                                    width < 769 && (
-                                        <div className="mobile-form dropOut ">
-                                            <div className="triangle"></div>
-                                            <Form className="search-input-form">
-                                                <Form.Control type="text" name="Search" placeholder="Search store"  />
-                                                <i className="mdi mdi-magnify special-tag"></i>
-                                            </Form>
-                                        </div>
-                                    )
-                                }
+                                <SearchBar list={list} toggleSearch={toggleSearch} />
                                 { width < 992 && (
-                                    <div className="trigger">
-                                        <svg className="bars" viewBox="0 0 100 100" onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>): void => toggleBurger(e)}>
-                                        <path className="line top" d="m 30,33 h 40 c 13.100415,0 14.380204,31.80258 6.899646,33.421777 -24.612039,5.327373 9.016154,-52.337577 -12.75751,-30.563913 l -28.284272,28.284272"></path>
-                                        <path className="line middle" d="m 70,50 c 0,0 -32.213436,0 -40,0 -7.786564,0 -6.428571,-4.640244 -6.428571,-8.571429 0,-5.895471 6.073743,-11.783399 12.286435,-5.570707 6.212692,6.212692 28.284272,28.284272 28.284272,28.284272"></path>
-                                        <path className="line bottom" d="m 69.575405,67.073826 h -40 c -13.100415,0 -14.380204,-31.80258 -6.899646,-33.421777 24.612039,-5.327373 -9.016154,52.337577 12.75751,30.563913 l 28.284272,-28.284272"></path>
-                                        </svg>
-                                    </div>
+                                    <HamBurger toggleBurger={toggleBurger} />
                                 )}
                             </div>
                         </div>

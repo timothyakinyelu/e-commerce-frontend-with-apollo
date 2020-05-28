@@ -28,3 +28,9 @@ export const GET_WISH_ITEMS = gql`
         wishListItems @client
     }
 `;
+
+export const TOGGLE_CART = gql`
+    mutation addOrRemoveFromWishList($productId: ID!) {
+        addOrRemoveFromWishList(id: $productId) @client
+    }
+`;

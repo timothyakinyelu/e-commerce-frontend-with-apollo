@@ -1,5 +1,8 @@
 import React from 'react';
 import { ProductNode } from '../../graphql';
+import { useMutation } from '@apollo/react-hooks';
+import { TOGGLE_CART } from '../../graphql/queries/products';
+import { Button } from 'react-bootstrap';
 
 interface ProductProp {
     product: ProductNode
@@ -7,7 +10,14 @@ interface ProductProp {
 
 const Product: React.FC<ProductProp> = (props): JSX.Element => {
     const { product } = props;
-    // console.log(props.product);
+    
+    const [mutate, {error}] = useMutation(
+        TOGGLE_CART, {
+            variables: { productId: product.node.id}, 
+        }
+    )
+
+    if (error) return <p>Unable to add wishlist!</p>;
 
     return (
         <article 
@@ -67,14 +77,15 @@ const Product: React.FC<ProductProp> = (props): JSX.Element => {
                     }
                 </div>
             </a>
-            <button type="button" 
+            <Button type="button" 
                 data-auto-id="saveForLater" 
                 data-auto-state="inactive" 
                 className="_2HTnAzH" 
                 aria-label="Save for later" aria-pressed="false"
+                bsPrefix="wish"
             >
-                <span className="_30BqGyh mdi mdi-heart-outline"></span>
-            </button>
+                <span className="_30BqGyh mdi mdi-heart-outline" onClick={() => mutate()}></span>
+            </Button>
         </article>
     );
 }
