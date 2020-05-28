@@ -1,17 +1,21 @@
 import gql from 'graphql-tag';
 import { ApolloCache } from 'apollo-cache';
 import { Resolvers } from 'apollo-client';
-import { ProductNode } from './Shop/graphql';
-import { GET_VIEWED_PRODUCTS } from './Shop/graphql/queries/products';
+import { ProductInfo } from '..';
+import { GET_WISH_ITEMS } from './products';
 
 export const typeDefs = gql`
 
     extend type Query {
-        viewed: Int!
+        wishListItems: [ID!]!
     }
 
     extend type Product {
-        isViewed: Boolean!
+        inWishList: Boolean!
+    }
+
+    extend type mutation {
+        addOrRemoveFromWishList(id: ID!): [ID!]!
     }
 `;
 
@@ -32,14 +36,14 @@ interface AppResolvers extends Resolvers {
   
 export const resolvers: AppResolvers = {
     Product: {
-        isViewed: (product: ProductNode, _, { cache }): boolean => {
-            const queryResult = cache.readQuery<any>({ 
-            query: GET_VIEWED_PRODUCTS 
-            });
-            if (queryResult) {
-            return queryResult.viewed.includes(product.node.id)
-            } 
-            return false;
+        inWishList: (product: ProductInfo, _, { cache }): boolean => {
+          const queryResult = cache.readQuery<any>({ 
+            query: GET_WISH_ITEMS
+          });
+          if (queryResult) {
+            return queryResult.wishListItems.includes(product.id)
+          } 
+          return false;
         }
-    },
+      },
 };

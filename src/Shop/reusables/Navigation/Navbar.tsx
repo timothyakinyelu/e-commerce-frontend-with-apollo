@@ -6,6 +6,8 @@ import { GET_CATEGORIES } from '../../graphql/queries/categories';
 import { Category } from '../../graphql';
 import { useWindowResize } from '../../../useWindowResize';
 import { Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { GET_WISH_ITEMS } from '../../graphql/queries/products';
 
 const Navbar = (): JSX.Element => {
     const { 
@@ -15,7 +17,12 @@ const Navbar = (): JSX.Element => {
     } = useQuery(GET_CATEGORIES, { fetchPolicy: "cache-first" });
     const { width } = useWindowResize();
 
+    const { 
+        data: list
+    } = useQuery(GET_WISH_ITEMS);
+
     const headerB = document.getElementById('bottomHeader') as HTMLElement;
+    console.log(list.wishListItems.length);
 
     if(headerB) {
         if(width < 992) {
@@ -98,12 +105,12 @@ const Navbar = (): JSX.Element => {
                                         </h2>
                                         <ul className="submenu-wrapper-inner">
                                             {  
-                                                parent.products.map((e) => e['brand_id'])
+                                                parent.products.edges.map((e) => e.node['brand_id'])
                                                 .map((e, i, final) => final.indexOf(e) === i && i)
-                                                .filter((e: any) => parent.products[e]).map((e: any) => parent.products[e])
+                                                .filter((e: any) => parent.products.edges[e]).map((e: any) => parent.products.edges[e])
                                                 .map(x => (
-                                                    <li key={x.brand.id}>
-                                                        <a href="product_list.html">{x.brand.name}</a>
+                                                    <li key={x.node.brand.id}>
+                                                        <a href="product_list.html">{x.node.brand.name}</a>
                                                     </li>
                                                 ))
                                             }
@@ -266,9 +273,12 @@ const Navbar = (): JSX.Element => {
                                         }
                                         <li className="">
                                             <div className="wishlist">
-                                                <a href="cart.html">
+                                                <span className="badge badge-secondary">
+                                                    { list.wishListItems.length }
+                                                </span>
+                                                <Link to="/shop/wishlist">
                                                     <i className="mdi mdi-heart-outline"></i>
-                                                </a>
+                                                </Link>
                                             </div>
                                         </li>
                                         <li>

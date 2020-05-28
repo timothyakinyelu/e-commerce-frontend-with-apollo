@@ -6,12 +6,25 @@ export interface Category {
     parent_id: number;
     status: number;
     children: Category[];
-    products: Product[];
+    products: ProductEdges;
+}
+
+export interface ProductEdges {
+    edges: ProductNode[];
+    pageInfo: ProductPageInfo
+}
+
+export interface ProductPageInfo {
+    hasNextPage: boolean;
+    endCursor: number;
+    count: number;
+    total: number;
 }
 
 export interface ProductNode {
     node: ProductInfo;
 }
+
 export interface ProductInfo {
     id: number;
     brand_id: number;

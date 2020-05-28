@@ -24,6 +24,7 @@ const Categories: React.FC = (): JSX.Element => {
         if(data.parents) {
             return data.parents.map((category: Category) => (
                 <div key={category.id} className="card">
+                    {/* when you see this in the morning add endcursor to route like a query */}
                     <Link to={`/shop/cat/${category.name}/${category.id}`}>
                         <div className="card-body">
                             <figure>

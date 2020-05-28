@@ -23,8 +23,8 @@ export const GET_PRODUCTS = gql`
     }
 `;
 
-export const GET_VIEWED_PRODUCTS = gql`
-    query GetViewedProducts {
-        viewed @client
+export const GET_WISH_ITEMS = gql`
+    query GetWishItems {
+        wishListItems @client
     }
 `;
