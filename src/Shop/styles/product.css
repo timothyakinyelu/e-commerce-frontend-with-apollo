@@ -168,9 +168,10 @@
     cursor: default;
     outline: none;
 }
-/* button._2HTnAzH:focus-visible, [type=button]:not(:disabled){
-    border-color: #4fb9ed;
-} */
+button._2HTnAzH:focus{
+    outline: none;
+    color: #ff003c;
+}
 ._2HTnAzH:hover {
     color: #ff003c;
 }

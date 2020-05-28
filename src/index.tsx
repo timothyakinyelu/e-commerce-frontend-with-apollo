@@ -40,7 +40,7 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 
 cache.writeData({
     data: {
-        wishListItems: localStorage.getItem('wishListItems') === null ? [] : [localStorage.getItem('wishListItems')],
+        wishListItems: localStorage.getItem('wishListItems') === '' ? [] : [localStorage.getItem('wishListItems')]
     }
 })
 
