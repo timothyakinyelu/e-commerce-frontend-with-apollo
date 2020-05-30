@@ -24,11 +24,13 @@ const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
 
     return (
         <Fragment>
-            <h3>Product List</h3>
-            <div className="_3-pwX1m">
+            <section className="_3-pwX1m">
                 <div className="_2MoInDZ">
                     <div className="_3pQmLlY">
-                        <section className="products-center">
+                        <div className="section-head">
+                            <h3>Product List</h3>
+                        </div>
+                        <div className="products-center">
                             { productList() }
                             {
                                 products && products.pageInfo.hasNextPage && (
@@ -40,10 +42,10 @@ const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
                                     </Button>
                                 )
                             }
-                        </section>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </Fragment>
     );
 }

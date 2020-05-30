@@ -186,10 +186,10 @@ ul {
     padding: 0;
     font-weight: 400;
 }
-.header-bottom .navigation-menu {
+/* .header-bottom .navigation-menu {
     border-bottom: 1px solid #dae0e5;
     box-shadow: 0 1px 0px 0 #d3d3d34d;
-}
+} */
 .header-bottom .navigation-menu ul#navigation li.parent {
     font-family: Montserrat, 'sans-serif';
 }
@@ -509,7 +509,8 @@ ul {
         top: -4px;
         line-height: 23px;
     }
-    .header-bottom .header-right .wishlist i, .header-bottom .header-right .bag i {
+    .header-bottom .header-right .wishlist i, 
+    .header-bottom .header-right .bag i {
         font-size: 1.4em;
     }
     .header-bottom .header-right .bag::before {
@@ -645,5 +646,7 @@ ul {
     }
     .headerContainer .header-bottom {
         padding: 0px 10px;
+        border-bottom: 1px solid #e9ecef;
+        box-shadow: 0 1px 0 0 #d3d3d34d;
     }
 }

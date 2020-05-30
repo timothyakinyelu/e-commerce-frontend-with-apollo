@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { useWindowResize } from '../../useWindowResize';
 import { Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import NavLinks from './NavLinks';
 
 interface SearchBarProps {
     list: any;
@@ -37,23 +37,7 @@ const SearchBar: React.FC<SearchBarProps> = (props): JSX.Element => {
                             </li>
                         )
                     }
-                    <li className="">
-                        <div className="wishlist">
-                            <span className="badge badge-secondary">
-                                { list.wishListItems.length }
-                            </span>
-                            <Link to="/shop/wishlist">
-                                <i className="mdi mdi-heart-outline"></i>
-                            </Link>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="bag">
-                            <a href="cart.html">
-                                <i className="mdi mdi-shopping-outline"></i>
-                            </a>
-                        </div>
-                    </li>
+                    <NavLinks list={list} />
                 </ul>
             </div>
             {

@@ -1,6 +1,7 @@
 main {
     position: relative;
     top: 0px;
+    background: #f8f9fa;
 }
 
 @media screen and (max-width: 992px) {

@@ -25,6 +25,7 @@ const Navbar = (): JSX.Element => {
 
     const headerB = document.getElementById('bottomHeader') as HTMLElement;
 
+    // condition to check width size and toggle container
     if(headerB) {
         if(width < 992) {
             headerB.classList.replace('container', 'container-fluid');
@@ -33,6 +34,7 @@ const Navbar = (): JSX.Element => {
         }
     } 
 
+    // function to open and close hamburger icon
     const toggleBurger = (e: React.MouseEvent<SVGSVGElement, MouseEvent>): void => {
         e.preventDefault();
 
@@ -45,6 +47,7 @@ const Navbar = (): JSX.Element => {
         }
     }
 
+    // function to display search bar on mobile devices
     const toggleSearch = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
         e.preventDefault();
 
@@ -55,6 +58,7 @@ const Navbar = (): JSX.Element => {
         }
     }
 
+    // function to toggle dropdown in mobile navbar
     const toggleCollapse = (e: React.MouseEvent<HTMLLIElement, MouseEvent>): void => {
         e.preventDefault();
 
