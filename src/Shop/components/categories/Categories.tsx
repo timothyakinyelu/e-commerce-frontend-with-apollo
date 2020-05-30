@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_CATEGORIES } from '../../graphql/queries/categories';
+import { GET_ALL_CATEGORIES } from '../../graphql/queries/categories';
 import { Category } from '../../graphql';
 
 import imgHold from '../../../images/holdingImg.jpg';
@@ -12,17 +12,17 @@ const Categories: React.FC = (): JSX.Element => {
         data,
         loading,
         error
-    } = useQuery(GET_CATEGORIES);
+    } = useQuery(GET_ALL_CATEGORIES);
     
     if (loading) return <p>...Loading</p>;
     if (error) return <p>ERROR</p>;
     if (!data) return <p>Not found</p>;
 
     const categoryList = () => {
-        if(data.parents === undefined) return;
+        if(data.categories === undefined) return;
 
-        if(data.parents) {
-            return data.parents.map((category: Category) => (
+        if(data.categories) {
+            return data.categories.data.map((category: Category) => (
                 <div key={category.id} className="card">
                     {/* when you see this in the morning add endcursor to route like a query */}
                     <Link to={`/shop/cat/${category.name}/${category.id}`}>

@@ -28,14 +28,16 @@ const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
             <div className="_3-pwX1m">
                 <div className="_2MoInDZ">
                     <div className="_3pQmLlY">
-                        <section>
+                        <section className="products-center">
                             { productList() }
                             {
                                 products && products.pageInfo.hasNextPage && (
-                                    <Button onClick={() => {
-                                        loadMore()
-                                    } 
-                                    }>Load More</Button>
+                                    <Button 
+                                        className="loadmore" 
+                                        onClick={() => loadMore() }
+                                    >
+                                        Load More
+                                    </Button>
                                 )
                             }
                         </section>

@@ -76,28 +76,30 @@
     color: #2d2d2d;
     display: block;
     width: 100%;
-    height: 40px;
+    /* height: 40px; */
     margin: 0 0 12px;
+    padding: 20px;
 }
 ._3J74XsK {
-    overflow: hidden;
-    height: 44px;
+    /* overflow: hidden; */
+    /* height: 44px; */
     line-height: 22px;
     word-wrap: break-word;
+    font-weight: 600;
 }
-._3J74XsK p {
+/* ._3J74XsK p {
     margin: 0;
     font-family: 'Montserrat', 'sans-serif';
     font-weight: 600;
     font-size: 0.96em;
     color: #495057;
-}
-._3J74XsK>:first-child {
+} */
+/* ._3J74XsK>:first-child {
     float: right;
     width: 100%;
     margin-left: -1px;
-}
-._3J74XsK:before {
+} */
+/* ._3J74XsK:before {
     content: "";
     float: left;
     width: 1px;
@@ -115,11 +117,13 @@
     padding-right: 1px;
     background: -webkit-gradient(linear,left top,right top,from(hsla(0,0%,100%,0)),to(#fff));
     background: linear-gradient(90deg,hsla(0,0%,100%,0),#fff);
-}
+} */
 ._3uttjfs {
-    position: absolute;
+    /* position: absolute;
     top: 7px;
-    display: inline-flex;
+    display: inline-flex; */
+    font-size: .9rem;
+    font-weight: 600;
 }
 ._1ldzWib, ._1ldzWic, ._1ldzWid {
     font-family: 'Livvic', sans-serif;
@@ -148,10 +152,22 @@
     color: #ff003c;
 }
 .Dy5fJQR {
-    font-weight: 900;
+    /* font-weight: 500; */
     letter-spacing: 2px;
-    color: #651262;
+    color: #6c757d;
     white-space: nowrap;
+}
+.Dy5fJQS {
+    font-size: 12px;
+    color: #6c757d;
+    text-decoration-line: line-through;
+}
+.Dy5fJQJ {
+    color: #ff003c;
+    font-weight: 600;
+}
+.Dy5fJQJ {
+    padding-left: 5px;
 }
 ._2HTnAzH {
     position: absolute;
@@ -170,20 +186,88 @@
 }
 button._2HTnAzH:focus{
     outline: none;
+}
+button._2HTnAzH.isWished{
     color: #ff003c;
+    text-emphasis: double-circle;
 }
 ._2HTnAzH:hover {
     color: #ff003c;
+    text-emphasis: double-circle;
 }
-._2HTnAzH span:first-child {
+/* ._2HTnAzH span:first-child {
     width: 20px;
     height: 18px;
-}
+} */
 ._30BqGyh {
     display: inline-block;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     color: currentcolor;
+}
+.loadmore {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -37px;
+    margin: auto;
+    width: 300px;
+    background-color: transparent;
+    color: #212529;
+    text-transform: uppercase;
+    font-family: Montserrat;
+    font-weight: 600;
+    padding: 10px;
+}
+.loadmore.btn-primary:focus {
+    outline: none
+}
+.loadmore.btn-primary {
+    border-color: #6c757d;
+}
+.loadmore.btn:hover, .loadmore.btn-primary:focus {
+    color: red;
+    background-color: transparent;
+    border-color: #6c757d;
+}
+/* Test css for product */
+section.products-center {
+    width: 90vw;
+    margin: 0 auto;
+    max-width: 1170px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 2rem;
+}
+.product .img-container {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #d3d3d338;
+    border-radius: 6px;
+}
+.product .product-link {
+    background-color: rgb(255, 255, 255);
+    display: block;
+    height: 0px;
+    padding-top: 10%;
+    padding-bottom: 100%;
+    position: relative;
+}
+.img-container ._2HTnAzH {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    /* padding: 0.5rem 0.75rem; */
+    font-weight: bold;
+}
+.product-img {
+    display: block;
+    width: 100%;
+    min-height: 10rem;
+}
+.img-container:hover .product-img {
+    opacity: 0.5;
 }
 
 @media (min-width: 768px){
@@ -191,7 +275,7 @@ button._2HTnAzH:focus{
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         max-width: 1366px;
-        padding: 0 24px;
+        padding: 24px 24px;
         margin: 0 auto;
     }
     /* ._2qG85dG {
@@ -206,5 +290,18 @@ button._2HTnAzH:focus{
     }
     ._2MoInDZ {
         padding: 0 0 36px;
+    }
+    /* Test css for product */
+    section.products-center {
+        width: 90vw;
+        margin: 0 auto;
+        max-width: 1170px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        column-gap: 1.5rem;
+        row-gap: 2rem;
+    }
+    .product-img {
+        min-height: 12rem;
     }
 }

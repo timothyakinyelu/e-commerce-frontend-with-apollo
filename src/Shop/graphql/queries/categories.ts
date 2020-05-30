@@ -29,6 +29,17 @@ export const GET_CATEGORIES = gql`
     }
 `;
 
+export const GET_ALL_CATEGORIES = gql`
+    query GetAllCategories {
+        categories {
+            data {
+               id
+               name
+            }
+        }
+    }
+`;
+
 export const GET_CATEGORY_PRODUCTS = gql`
     query GetProductsByCategory($catID: ID!, $after: String) {
         category(id: $catID) {
