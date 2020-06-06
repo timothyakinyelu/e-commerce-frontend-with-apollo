@@ -32,10 +32,10 @@ export const GET_CATEGORIES = gql`
 export const GET_ALL_CATEGORIES = gql`
     query GetAllCategories {
         categories {
-            data {
+            # data {
                id
                name
-            }
+            # }
         }
     }
 `;

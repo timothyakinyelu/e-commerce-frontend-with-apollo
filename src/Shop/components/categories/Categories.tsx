@@ -22,7 +22,7 @@ const Categories: React.FC = (): JSX.Element => {
         if(data.categories === undefined) return;
 
         if(data.categories) {
-            return data.categories.data.map((category: Category) => (
+            return data.categories.map((category: Category) => (
                 <div key={category.id} className="card">
                     {/* when you see this in the morning add endcursor to route like a query */}
                     <Link to={`/shop/cat/${category.name}/${category.id}`}>

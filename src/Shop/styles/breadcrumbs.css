@@ -1,0 +1,9 @@
+ol.breadcrumb {
+    max-height: 50px;
+}
+li.breadcrumb-item {
+    height: min-content;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    content: "›";
+}

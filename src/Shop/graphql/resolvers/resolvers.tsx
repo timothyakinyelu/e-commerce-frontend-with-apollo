@@ -63,7 +63,9 @@ export const resolvers: AppResolvers = {
                 localStorage.setItem('wishListItems', data.wishListItems);
                 return data.wishListItems;
             }
+            localStorage.removeItem('wishListItems');
             return [];
+            
         }
     }
 };

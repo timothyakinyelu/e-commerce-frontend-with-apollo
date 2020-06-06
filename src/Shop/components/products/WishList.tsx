@@ -4,6 +4,9 @@ import { GET_WISH_ITEMS } from '../../graphql/queries/products';
 
 const WishList: React.FC = ():JSX.Element => {
 
+    if(localStorage.getItem('wishListItems') === null) {
+        console.log(localStorage.getItem('wishListItems'));
+    }
     const { data, loading, error } = useQuery(
         GET_WISH_ITEMS
     );

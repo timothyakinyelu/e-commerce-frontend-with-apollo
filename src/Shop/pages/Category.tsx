@@ -3,6 +3,7 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { GET_CATEGORY_PRODUCTS } from '../graphql/queries/categories';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import ProductList from '../components/products/ProductList';
+import BreadCrumbs from '../components/BreadCrumbs';
 
 const Category: React.FC = (): JSX.Element => {
     const { catID, catName } = useParams();
@@ -119,6 +120,7 @@ const Category: React.FC = (): JSX.Element => {
     
     return (
         <Fragment>
+            <BreadCrumbs firstItem={catName} />
             <ProductList products={data.category.products} loadMore={() => loadMore()} />
         </Fragment>
     )
