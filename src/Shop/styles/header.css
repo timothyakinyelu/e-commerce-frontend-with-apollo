@@ -152,10 +152,10 @@ ul {
     font-size: 1.9em;
     cursor: pointer;
 }
-.header-bottom .header-right .bag {
+.header-bottom .header-right .cart {
     position: relative;
 }
-.header-bottom .header-right .bag::before {
+.header-bottom .header-right .cart::before {
     position: absolute;
     content: "02";
     width: 25px;
@@ -171,7 +171,7 @@ ul {
     transition: all 0.2s ease-out 0s;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
-.header-bottom .header-right .bag i {
+.header-bottom .header-right .cart i {
     /* width: 43px;
     height: 43px; */
     line-height: 43px;
@@ -510,10 +510,10 @@ ul {
         line-height: 23px;
     }
     .header-bottom .header-right .wishlist i, 
-    .header-bottom .header-right .bag i {
+    .header-bottom .header-right .cart i {
         font-size: 1.4em;
     }
-    .header-bottom .header-right .bag::before {
+    .header-bottom .header-right .cart::before {
         width: 23px;
         height: 23px;
         top: -4px;

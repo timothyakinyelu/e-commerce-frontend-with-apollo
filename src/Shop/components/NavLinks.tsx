@@ -25,7 +25,7 @@ const NavLinks: React.FC<NavLinksProps> = (props): JSX.Element => {
                 </div>
             </li>
             <li>
-                <div className="bag">
+                <div className="cart">
                     <a className="bag-link" href="cart.html">
                         <i className="mdi mdi-shopping-outline"></i>
                     </a>

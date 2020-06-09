@@ -275,9 +275,9 @@ button._2HTnAzH.isWished{
     width: 100%;
     min-height: 10rem;
 }
-.img-container:hover .product-img {
+/* .img-container:hover .product-img {
     opacity: 0.5;
-}
+} */
 
 @media (min-width: 768px){
     ._3-pwX1m {

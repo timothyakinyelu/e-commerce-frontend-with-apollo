@@ -1,5 +1,5 @@
 /* Start Mini Cart */
-.shopping-bag-rollover {
+.mini-cart {
     background: #fff;
     color: #222;
     display: none;
@@ -20,36 +20,36 @@
     float: left;
     margin-left: 24px;
 }
-.shopping-bag-rollover .shopping-bag-rollover-items-wrapper {
+.mini-cart .mini-cart-content-wrapper {
     margin: 10px 0;
     overflow: hidden;
     padding: 0 10px;
     position: relative;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item:last-of-type {
+.mini-cart .mini-cart-item:last-of-type {
     margin: 0;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item {
+.mini-cart .mini-cart-item {
     background: #fff;
     display: block;
     margin: 0 0 10px;
     padding: 10px;
     position: relative;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item>a {
+.mini-cart .mini-cart-item>a {
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item .shopping-bag-rollover-item-image {
+.mini-cart .mini-cart-item .mini-cart-item-image {
     display: block;
     height: 100%;
     max-height: 148px;
     width: auto;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item 
-.shopping-bag-item-product {
+.mini-cart .mini-cart-item 
+.mini-cart-product {
     font-size: 13px;
     line-height: 20px;
     float: right;
@@ -57,24 +57,24 @@
     margin-bottom: 1px;
     width: 60%;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item 
-.shopping-bag-item-product h3 {
+.mini-cart .mini-cart-item 
+.mini-cart-product h3 {
     margin: 0;
     text-transform: none;
 }
-.product-detail-item-added .product-item-headline, 
+.product-detail-item-added .product-header, 
 .product-detail-item-added .product-item-price, 
-.shopping-bag-rollover .product-item-headline, 
-.shopping-bag-rollover .product-item-price {
+.mini-cart .product-header, 
+.mini-cart .product-item-price {
     font-size: 13px;
     line-height: 20px;
 }
-.shopping-bag-rollover .product-item-headline, 
-.shopping-bag-rollover .product-item-price {
+.mini-cart .product-header, 
+.mini-cart .product-item-price {
     display: block;
     width: 100%;
 }
-.product-item-headline, .product-item-price {
+.product-header, .product-item-price {
     display: inline-block;
     font-family: "HM Sans Regular","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
     font-size: 16px;
@@ -90,21 +90,21 @@
 small {
     font-size: 80%;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item dl {
+.mini-cart .mini-cart-item dl {
     font-size: 11px;
     line-height: 16px;
     margin: 0;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item dt {
+.mini-cart .mini-cart-item dt {
     clear: left;
     float: left;
     margin: 1px 0;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item dd {
+.mini-cart .mini-cart-item dd {
     float: left;
     margin: 1px 0 1px 3px;
 }
-.shopping-bag-rollover .shopping-bag-rollover-item .shopping-bag-item-total-price {
+.mini-cart .mini-cart-item .mini-cart-product-price {
     font-size: 11px;
     line-height: 16px;
     box-sizing: border-box;
@@ -113,46 +113,46 @@ small {
     padding-right: 15px;
     width: 60%;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary {
+.mini-cart .mini-cart-summary {
     background: #fff;
     padding: 0 24px 24px;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary dl {
+.mini-cart .mini-cart-summary dl {
     border-top: 2px solid #e4e4e4;
     margin: 0 0 12px 0;
     padding: 12px 0 0 0;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary dt {
+.mini-cart .mini-cart-summary dt {
     clear: both;
     float: left;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary dd, 
-.shopping-bag-rollover .shopping-bag-rollover-summary dt {
+.mini-cart .mini-cart-summary dd, 
+.mini-cart .mini-cart-summary dt {
     font-size: 13px;
     line-height: 20px;
     line-height: 32px;
     text-transform: capitalize;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary dd {
+.mini-cart .mini-cart-summary dd {
     float: right;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary .shopping-bag-rollover-order-total {
+.mini-cart .mini-cart-summary .mini-cart-total {
     border-top: 2px solid #d0d0d0;
     padding: 24px 0 40px 0;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary .shopping-bag-rollover-order-total dt, .shopping-bag-rollover .shopping-bag-rollover-summary .shopping-bag-rollover-order-total dd {
+.mini-cart .mini-cart-summary .mini-cart-total dt, .mini-cart .mini-cart-summary .mini-cart-total dd {
     font-size: 16px;
     line-height: 20px;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary .button, 
-.shopping-bag-rollover .shopping-bag-rollover-summary .responsive.gift-card input[type='submit'], 
-.responsive.gift-card .shopping-bag-rollover .shopping-bag-rollover-summary input[type='submit'] {
+.mini-cart .mini-cart-summary .button, 
+.mini-cart .mini-cart-summary .responsive.gift-card input[type='submit'], 
+.responsive.gift-card .mini-cart .mini-cart-summary input[type='submit'] {
     display: block;
     margin-top: 10px;
 }
-.shopping-bag-rollover .shopping-bag-rollover-summary .button:last-child, 
-.shopping-bag-rollover .shopping-bag-rollover-summary .responsive.gift-card input:last-child[type='submit'], 
-.responsive.gift-card .shopping-bag-rollover .shopping-bag-rollover-summary input:last-child[type='submit'] {
+.mini-cart .mini-cart-summary .button:last-child, 
+.mini-cart .mini-cart-summary .responsive.gift-card input:last-child[type='submit'], 
+.responsive.gift-card .mini-cart .mini-cart-summary input:last-child[type='submit'] {
     margin-left: 0;
 }
 input[type='submit'].button-big, input[type='reset'].button-big, 
@@ -194,7 +194,7 @@ input[type='button'].button-big, .button.button-big,
     vertical-align: baseline;
     width: 100%;
 }
-.bag:hover .shopping-bag-rollover {
+.cart:hover .mini-cart {
     display: block;
 }
 @media screen and (min-width: 769px) {

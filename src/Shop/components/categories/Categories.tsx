@@ -23,20 +23,38 @@ const Categories: React.FC = (): JSX.Element => {
 
         if(data.categories) {
             return data.categories.map((category: Category) => (
-                <div key={category.id} className="card">
-                    {/* when you see this in the morning add endcursor to route like a query */}
-                    <Link to={`/shop/cat/${category.name}/${category.id}`}>
-                        <div className="card-body">
-                            <figure>
-                                <img src={imgHold} alt="" />
-                            </figure>
-                        </div>
-                    </Link>
-                    <div className="card-footer">
-                        <h4>{ category.name }</h4>
-                        <p>Lorem ipsum dolor sit amet</p>
+                <article className="category product" key={category.id}>
+                    <div className="img-container">
+                        <Link to={`/shop/cat/${category.name}/${category.id}`} className="category-link">
+                            <img className="product-img" 
+                                src={imgHold} 
+                                alt={ category.name }
+                            />
+                        </Link>
+                        <button className="category-shop">shop now</button>
                     </div>
-                </div>
+                    <div data-auto-id="productTileDescription" className="_3WEsAhb">
+                        <h6 className="_3J74XsK">
+                            {/* <div> */}
+                            { category.name }
+                            {/* </div> */}
+                        </h6>
+                    </div>
+                </article>
+                // <div key={category.id} className="card">
+                //     {/* when you see this in the morning add endcursor to route like a query */}
+                //     <Link to={`/shop/cat/${category.name}/${category.id}`}>
+                //         <div className="card-body">
+                //             <figure>
+                //                 <img src={imgHold} alt="" />
+                //             </figure>
+                //         </div>
+                //     </Link>
+                //     <div className="card-footer">
+                //         <h4>{ category.name }</h4>
+                //         <p>Lorem ipsum dolor sit amet</p>
+                //     </div>
+                // </div>
             ))
         }
     }
@@ -44,10 +62,10 @@ const Categories: React.FC = (): JSX.Element => {
     return (
         <Fragment>
             <section className="main-section container-fluid">
-                <div className="section-caption">
+                {/* <div className="section-caption">
                     <h3>Browse our Catalog</h3>
-                </div>
-                <div className="row">
+                </div> */}
+                <div className="categories-center">
                     { categoryList() }
                 </div>
             </section>

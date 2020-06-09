@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import { PRODUCT_DETAILS } from './fragment';
 
+// fetch parent categories to display in navbar
 export const GET_CATEGORIES = gql`
     query GetCategories {
         parents(where: { column: PARENT, operator: IS_NULL }) {
@@ -29,9 +30,10 @@ export const GET_CATEGORIES = gql`
     }
 `;
 
+// fetch sub categories with a featured value of true
 export const GET_ALL_CATEGORIES = gql`
     query GetAllCategories {
-        categories {
+        categories(where: { column: FEATURED, value: TRUE }) {
             # data {
                id
                name

@@ -1,12 +1,28 @@
-.card-body img {
+/* .card-body img {
     width: 100%;
 }
 .main-section .card {
-    width: 500px;
-    margin: auto;
+    width: 217px;
+    /* margin: auto; 
     margin-top: 20px;
     margin-bottom: 20px;
     border: none;
+}
+.main-section .card:first-child {
+    margin-right: 0;
+    margin-left: 20px;
+}
+.main-section .card:nth-child(2) {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.main-section .card:nth-child(3) {
+    margin-right: 20px;
+    margin-left: 0;
+}
+.main-section .card:last-child {
+    margin-right: 20px;
+    margin-left: 0;
 }
 .main-section .card-footer {
     margin: auto;
@@ -39,7 +55,7 @@ a .card-body:hover img {
 	transform: scale(1.3);
 }
 figure {
-	width: 500px;
+	width: 217px;
 	margin: 0;
 	padding: 0;
 	background: #fff;
@@ -48,4 +64,74 @@ figure {
 figure:hover+span {
 	bottom: -36px;
 	opacity: 1;
+}
+
+@media only screen and (min-width: 991px) {
+    .main-section .card {
+        width: 295px;
+        /* margin: auto; 
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: none;
+    }
+    figure {
+        width: 295px;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        overflow: hidden;
+    }
+} */
+.main-section {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.product .category-link {
+    background-color: rgb(255, 255, 255);
+    /* display: block; */
+    height: 0px;
+    padding-top: 10%;
+    padding-bottom: 100%;
+    position: relative;
+}
+.categories-center {
+    width: 90vw;
+    margin: 0 auto;
+    max-width: 1170px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 2rem;
+}
+.category {
+    text-align: center;
+}
+.img-container .category-shop {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    text-transform: capitalize;
+    background: #00b1ff;
+    border-color: #00b1ff;
+    font-family: Montserrat;
+    font-weight: 600;
+}
+.img-container button:focus {
+    outline: none
+}
+.img-container button {
+    border: none;
+}
+.img-container:hover .category-shop {
+    display: block;
+}
+.category ._3WEsAhb {
+    padding-right: 0;
+}
+
+@media (min-width: 992px) {
+    .categories-center {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
 }
