@@ -24,8 +24,8 @@ const ShopComponent = () => {
             <main>
                 <Switch>
                     <Route exact path="/" component={Main} />
-                    <Route path="/shop/cat/:catName/:catID/" component={Category} />
-                    <Route path="/shop/cat/:catName/:catID/:productName/:productID" component={ProductInfo} />
+                    <Route exact path="/shop/cat/:catName/:catID/" component={Category} />
+                    <Route exact path="/shop/cat/:catName/:catID/:productName/:productID" component={ProductInfo} />
                     <Route path="/shop/wishlist" component={WishList} />
                 </Switch>
             </main>

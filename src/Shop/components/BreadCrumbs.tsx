@@ -9,13 +9,14 @@ interface BreadCrumbsProps {
 }
 
 const BreadCrumbs: React.FC<BreadCrumbsProps> = (props): JSX.Element => {
-    const { firstItem, secondItem } = props
+    const { firstItem, secondItem } = props;
+
     return (
         <Breadcrumb>
             <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
             <Breadcrumb.Item active>{ firstItem }</Breadcrumb.Item>
             { 
-                secondItem === '' && 
+                secondItem && 
                 <Breadcrumb.Item active>{ secondItem }</Breadcrumb.Item>
             }
         </Breadcrumb>
